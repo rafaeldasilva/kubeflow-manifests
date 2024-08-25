@@ -136,10 +136,8 @@ module "eks_blueprints_kubernetes_addons" {
   cluster_endpoint  = module.eks_blueprints.eks_cluster_endpoint
   cluster_version   = module.eks_blueprints.eks_cluster_version
   oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
-  enable_nvidia_gpu_operator = local.using_gpu
 
-  # depends_on = [module.ebs_csi_driver_irsa, module.eks_data_addons]
-  depends_on = [module.ebs_csi_driver_irsa]
+  depends_on = [module.ebs_csi_driver_irsa, module.eks_data_addons]
 
   eks_addons = {
     aws-ebs-csi-driver = {
@@ -189,14 +187,14 @@ module "eks_blueprints_kubernetes_addons" {
   tags = local.tags
 }
 
-# module "eks_data_addons" {
-#   source  = "aws-ia/eks-data-addons/aws"
-#   version = "~> 1.0" # ensure to update this to the latest/desired version
+module "eks_data_addons" {
+  source  = "aws-ia/eks-data-addons/aws"
+  version = "~> 1.0" # ensure to update this to the latest/desired version
 
-#   oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
+  oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
 
-#   enable_nvidia_gpu_operator = local.using_gpu
-# }
+  enable_nvidia_gpu_operator = local.using_gpu
+}
 
 # todo: update the blueprints repo code to export the desired values as outputs
 module "eks_blueprints_outputs" {

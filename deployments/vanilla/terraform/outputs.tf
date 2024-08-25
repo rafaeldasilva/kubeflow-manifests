@@ -52,3 +52,8 @@ output "region" {
   value       = local.region
   description = "AWS region"
 }
+
+# output addon_context {
+#   value       = module.eks_blueprints_outputs.addon_context
+#   description = "EKC addon context passsed to helm"
+# }

@@ -31,7 +31,7 @@ locals {
     desired_size    = 5
     max_size        = 10
     disk_size       = var.node_disk_size_cpu
-    subnet_ids      = module.vpc.private_subnets
+    subnet_ids      = try(module.vpc.private_subnets, [])
   }
 
   managed_node_group_gpu = local.using_gpu ? {
@@ -42,7 +42,7 @@ locals {
     max_size        = 5
     ami_type        = "AL2_x86_64_GPU"
     disk_size       = var.node_disk_size_gpu
-    subnet_ids      = module.vpc.private_subnets
+    subnet_ids      = try(module.vpc.private_subnets, [])
   } : null
 
   potential_managed_node_groups = {
@@ -113,7 +113,7 @@ module "eks_blueprints" {
   cluster_version = local.eks_version
 
   vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnets
+  private_subnet_ids = try(module.vpc.private_subnets, [])
 
   # configuration settings: https://github.com/aws-ia/terraform-aws-eks-blueprints/blob/main/modules/aws-eks-managed-node-groups/locals.tf
   managed_node_groups = local.managed_node_groups

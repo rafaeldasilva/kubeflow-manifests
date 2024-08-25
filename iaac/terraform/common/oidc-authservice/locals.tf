@@ -5,7 +5,7 @@ locals {
     name      = local.name
     namespace = "default" # change to namespace resources are being created it
     values    = []
-    timeout   = "600"
+    timeout   = "1200"
   }
 
   helm_config = merge(

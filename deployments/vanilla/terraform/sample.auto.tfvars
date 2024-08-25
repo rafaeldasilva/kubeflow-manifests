@@ -1,0 +1,6 @@
+cluster_name="kubeflow"
+cluster_region="us-west-2"
+notebook_enable_culling="true"
+notebook_cull_idle_time="30"
+notebook_idleness_check_period="5"
+eks_version="1.25"

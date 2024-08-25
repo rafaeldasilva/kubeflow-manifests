@@ -136,8 +136,10 @@ module "eks_blueprints_kubernetes_addons" {
   cluster_endpoint  = module.eks_blueprints.eks_cluster_endpoint
   cluster_version   = module.eks_blueprints.eks_cluster_version
   oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
+  enable_nvidia_gpu_operator = local.using_gpu
 
-  depends_on = [module.ebs_csi_driver_irsa, module.eks_data_addons]
+  # depends_on = [module.ebs_csi_driver_irsa, module.eks_data_addons]
+  depends_on = [module.ebs_csi_driver_irsa]
 
   eks_addons = {
     aws-ebs-csi-driver = {
@@ -159,6 +161,7 @@ module "eks_blueprints_kubernetes_addons" {
   enable_cert_manager                 = true
 
   cert_manager = {
+    name          = "cert-manager"
     chart_version = "v1.10.0"
   }
 
@@ -167,15 +170,18 @@ module "eks_blueprints_kubernetes_addons" {
 
 
   aws_efs_csi_driver = {
+    name          = "efs-csi-driver"
     namespace     = "kube-system"
     chart_version = "2.4.1"
   }
 
   aws_load_balancer_controller = {
+    name          = "load-balancer-controller"
     chart_version = "v1.4.8"
   }
 
   aws_fsx_csi_driver = {
+    name          = "fsx-csi-driver"
     namespace     = "kube-system"
     chart_version = "1.5.1"
   }
@@ -183,14 +189,14 @@ module "eks_blueprints_kubernetes_addons" {
   tags = local.tags
 }
 
-module "eks_data_addons" {
-  source  = "aws-ia/eks-data-addons/aws"
-  version = "~> 1.0" # ensure to update this to the latest/desired version
+# module "eks_data_addons" {
+#   source  = "aws-ia/eks-data-addons/aws"
+#   version = "~> 1.0" # ensure to update this to the latest/desired version
 
-  oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
+#   oidc_provider_arn = module.eks_blueprints.eks_oidc_provider_arn
 
-  enable_nvidia_gpu_operator = local.using_gpu
-}
+#   enable_nvidia_gpu_operator = local.using_gpu
+# }
 
 # todo: update the blueprints repo code to export the desired values as outputs
 module "eks_blueprints_outputs" {

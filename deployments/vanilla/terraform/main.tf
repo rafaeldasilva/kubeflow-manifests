@@ -155,29 +155,26 @@ module "eks_blueprints_kubernetes_addons" {
     }
   }
 
-  enable_aws_load_balancer_controller = true
   enable_cert_manager                 = true
-
   cert_manager = {
     name          = "cert-manager"
     chart_version = "v1.10.0"
   }
 
   enable_aws_efs_csi_driver = true
-  enable_aws_fsx_csi_driver = true
-
-
   aws_efs_csi_driver = {
     name          = "efs-csi-driver"
     namespace     = "kube-system"
     chart_version = "2.4.1"
   }
 
+  enable_aws_load_balancer_controller = true
   aws_load_balancer_controller = {
     name          = "load-balancer-controller"
     chart_version = "v1.4.8"
   }
 
+  enable_aws_fsx_csi_driver = true
   aws_fsx_csi_driver = {
     name          = "fsx-csi-driver"
     namespace     = "kube-system"

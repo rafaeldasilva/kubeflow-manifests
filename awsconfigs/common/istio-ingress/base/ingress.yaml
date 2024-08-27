@@ -4,7 +4,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/load-balancer-attributes: routing.http.drop_invalid_header_fields.enabled=true
-    alb.ingress.kubernetes.io/scheme: $(loadBalancerScheme)
+    alb.ingress.kubernetes.io/scheme: loadBalancerScheme_PLACEHOLDER
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/target-type: ip
   name: istio-ingress

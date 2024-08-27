@@ -1,11 +1,3 @@
-provider "aws" {
-  alias = "aws"
-}
-
-provider "aws" {
-  alias = "virginia"
-}
-
 # Add a custom domain to the user pool
 data "aws_route53_zone" "platform" {
   name = var.aws_route53_subdomain_zone_name

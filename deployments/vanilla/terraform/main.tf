@@ -155,7 +155,7 @@ module "eks_blueprints_kubernetes_addons" {
     }
   }
 
-  enable_cert_manager                 = true
+  enable_cert_manager = true
   cert_manager = {
     name          = "cert-manager"
     chart_version = "v1.10.0"

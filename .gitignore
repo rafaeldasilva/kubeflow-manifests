@@ -9,3 +9,4 @@ __pycache__
 .terraform*
 terraform.tfstate*
 test-generated.auto.tfvars
+*.auto.tfvars

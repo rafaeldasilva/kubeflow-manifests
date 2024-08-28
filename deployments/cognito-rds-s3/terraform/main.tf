@@ -17,9 +17,9 @@ locals {
   azs      = slice(local.available_azs, 0, local.az_count)
 
   tags = {
-    Platform                     = "kubeflow-on-aws"
-    KubeflowVersion              = "1.7"
-    alpha.eksctl.io/cluster-name = local.cluster_name
+    Platform                       = "kubeflow-on-aws"
+    KubeflowVersion                = "1.7"
+   # "alpha.eksctl.io/cluster-name" = local.cluster_name
   }
 
   kf_helm_repo_path = var.kf_helm_repo_path

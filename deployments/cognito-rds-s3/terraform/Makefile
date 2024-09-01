@@ -1,16 +1,16 @@
 SHELL := /bin/bash # Use bash syntax
 
 deploy: init \
- create-vpc \
- create-eks-cluster \
- deploy-eks-blueprints-k8s-addons \
- deploy-kubeflow-components
+	create-vpc \
+	create-eks-cluster \
+	deploy-eks-blueprints-k8s-addons \
+	deploy-kubeflow-components
 
 delete: delete-kubeflow-components \
- delete-eks-blueprints-k8s-addons \
- delete-eks-cluster \
- delete-vpc
-	terraform destroy -auto-approve
+	delete-eks-blueprints-k8s-addons \
+	delete-eks-cluster \
+	delete-vpc
+		terraform destroy -auto-approve
 
 init:
 	terraform init
